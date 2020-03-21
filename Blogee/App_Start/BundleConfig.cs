@@ -20,8 +20,10 @@ namespace Blogee
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js", "~/Scripts/popper.js"));
 
+            // we add our own style sheets to customize the application, without this little bundle below we will only have
+            // the css from the site.css file
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
