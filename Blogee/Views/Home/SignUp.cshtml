@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+@using Blogee.Models
+@model UserModel
+
+<html>
+<!-- the style must be placed in a header file, or can be put in a separate file if accessed again -->
+<body>
+
+    <!-- add the cshtml path to the new page to which we are redirected to, and the controller associated should deal with the data
+        here indeed we are redirected to the correct view -->
+
+    @using (Html.BeginForm("Index", "Dashboard", FormMethod.Post))
+    {
+        <span>Name:</span> @Html.TextBoxFor(m => m.Name)<br />
+        <span>Username: </span> @Html.TextBoxFor(m => m.Username)<br />
+        <span>Email: </span>@Html.TextBoxFor(m => m.Email)<br />
+        <span>Password: </span>@Html.TextBoxFor(m => m.Password)<br />
+        <span>I agree to the terms and conditions </span> @Html.RadioButtonFor(m => m.NewUser, true) <br/>
+        <input id="Submit" type="submit" value="submit" />
+    }
+
+</body>
+</html>

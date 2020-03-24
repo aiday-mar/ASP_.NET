@@ -20,10 +20,15 @@ namespace Blogee.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult SignUp()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Sign-up";
 
+            return View();
+        }
+
+        public ActionResult Login()
+        {
             return View();
         }
     }

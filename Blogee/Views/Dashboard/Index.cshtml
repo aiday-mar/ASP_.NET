@@ -1,7 +1,25 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
+    var user = ViewBag.User;
 }
 
 <h2>My dashboard</h2>
 
+@if (user != null) {
+    <table>
+        <tr>
+            <th> Name </th>
+            <th> Username </th>
+            <th> Email </th>
+            <th> Password </th>
+            <th> New user </th>
+        </tr>
+        <tr>
+            <td> @user.Name </td>
+            <td> @user.Username </td>
+            <td> @user.Email </td>
+            <td> @user.Password </td>
+            <td> @user.NewUser.ToString() </td>
+        </tr>
+    </table>
+}
