@@ -1,8 +1,10 @@
 ﻿<!DOCTYPE html>
+@using Blogee.Models;
+
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -13,14 +15,27 @@
 
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> 
-        <div id="navbar" class="navbar-collapse collapse"> 
-            <ul class="navbar-nav mr-auto"> 
-                <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li> 
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li> 
+        </button>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+
+                @if (CurrentUserModel.CurrentLoggedIn == false)
+                {
+                <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("SignUp", "SignUp", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-            </ul> 
+                }
+
+                @if (CurrentUserModel.CurrentLoggedIn == true)
+                {
+                <li class="nav-item active">@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("NewPost", "NewPost", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Messages", "Messages", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("LogOut", "LogOut", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                }
+
+            </ul>
         </div>
     </nav>
     <div class="container body-content">
@@ -33,7 +48,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required:false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 

@@ -1,25 +1,42 @@
-﻿@{
+﻿<!DOCTYPE html>
+@using Blogee.Models;
+
+@{
+
     ViewBag.Title = "Dashboard";
     var user = ViewBag.User;
+    var post = ViewBag.Post;
+
 }
 
-<h2>My dashboard</h2>
+<html>
+<body>
+    <h2>My dashboard</h2>
+    <h3> @CurrentUserModel.CurrentName </h3>
 
-@if (user != null) {
-    <table>
-        <tr>
-            <th> Name </th>
-            <th> Username </th>
-            <th> Email </th>
-            <th> Password </th>
-            <th> New user </th>
-        </tr>
-        <tr>
-            <td> @user.Name </td>
-            <td> @user.Username </td>
-            <td> @user.Email </td>
-            <td> @user.Password </td>
-            <td> @user.NewUser.ToString() </td>
-        </tr>
-    </table>
-}
+    <!-- the below is used to check that the post is indeed sent to the controller -->
+    @if (post != null)
+    {
+        <br />
+        <br />
+
+        <table>
+            <tr>
+                <th> Title </th>
+                <th> Description </th>
+                <th> Location </th>
+                <th> Tags </th>
+                <th> Content </th>
+            </tr>
+            <tr>
+                <td> @post.Title </td>
+                <td> @post.Description </td>
+                <td> @post.Location </td>
+                <td> @post.Tags </td>
+                <td> @post.Content </td>
+            </tr>
+        </table>
+    }
+
+</body>
+</html>

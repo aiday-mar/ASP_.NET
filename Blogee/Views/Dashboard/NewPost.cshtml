@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+@using Blogee.Models
+@model Post
+<head>
+    <script src="https://cdn.tiny.cloud/1/fhniyl2l65b6pqs3embbnfvmsq71uuvlolkiojh1xt07bcer/tinymce/5/tinymce.min.js" referrerpolicy="origin">
+    </script>
+    <script>
+        tinymce.init({
+            selector: '#myContent'
+        });
+    </script>
+</head>
+<html>
+<body>
+
+    <h2> New Post </h2>
+
+    @using (Html.BeginForm("SavePost", "Dashboard", FormMethod.Post))
+    {
+        <span>Title :</span> @Html.TextBoxFor(m => m.Title)<br />
+        <span>Description : </span> @Html.TextBoxFor(m => m.Description)<br />
+        <span>Location : </span>@Html.TextBoxFor(m => m.Location)<br />
+        <span>Tags separated by commas : </span> @Html.TextBoxFor(m => m.Tags) <br />
+        //<span>Content : </span> @Html.TextAreaFor(m => m.Content, new {rows="100", cols="30"}) <br/>
+        @Html.TextAreaFor(m => m.Content, new { rows = "50", id="myContent", name = "myContent"}) <br />
+        <input id="Submit" type="submit" value="submit" />
+    }
+
+</body>
+</html>
