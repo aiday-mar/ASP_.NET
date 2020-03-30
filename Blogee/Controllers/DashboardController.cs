@@ -10,6 +10,7 @@ using System.Text;
 using System.Web.Helpers;
 using System.Data;
 
+
 namespace Blogee.Controllers
 {
     public class DashboardController : Controller
@@ -163,7 +164,7 @@ namespace Blogee.Controllers
 
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult SavePost(Post p)
+        public ActionResult SavePost(PostModel p)
         {
             // this is the case when we post a new post and are redirected back to our dashboard
             // first check the data actually gets here
@@ -222,8 +223,7 @@ namespace Blogee.Controllers
         }
 
         public ActionResult NewPost() { return View(); }
-        public ActionResult Messages() { return View(); }
-
+        
         public ActionResult LogOut() {
 
             // upon the logout the static class is initialiazed back with null values
