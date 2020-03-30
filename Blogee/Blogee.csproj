@@ -127,13 +127,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\OtherUserModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CurrentUserModel.cs" />
     <Compile Include="Models\Like.cs" />
-    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\PostModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -280,7 +284,9 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Dashboard\NewPost.cshtml" />
-    <Content Include="Views\Dashboard\Messages.cshtml" />
+    <Content Include="Views\Shared\Search.cshtml" />
+    <Content Include="Views\Messages\Messages.cshtml" />
+    <Content Include="Views\Messages\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

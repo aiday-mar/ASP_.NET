@@ -1,0 +1,53 @@
+﻿@using Blogee.Models;
+@model SearchModel
+<html>
+<head>
+    <script>
+    function chatWithUser(Username) {
+
+        $.ajax({
+            url: '@Url.Action("ChooseChat", "Messages")',
+            type: "POST",
+            cache: false,
+            data: { username: Username },
+        })
+        .done(function () { window.location.href = "@Url.Action("Chat", "Messages")"; })
+        .fail(function() { alert("error");})
+        .always(function () { window.location.href = "@Url.Action("Chat", "Messages")"; });
+    }
+    </script>
+</head>
+
+<body>
+    <h2>Messages</h2>
+
+    @using (Html.BeginForm("NewContact", "Messages", FormMethod.Post))
+    {
+        <span style="color:black;"> New Contact: </span> @Html.TextBoxFor(m => m.SearchTerm)
+        <input type="submit" value="submit" />
+    }
+
+<div id="potential_contacts">
+
+    @if (Model != null)
+    {
+        if (Model.ListUsers != null)
+        {
+            foreach (var item in Model.ListUsers)
+            {
+
+            <div>
+
+                <span style="font-weight:bold">@item.Username</span>
+                <span style="font-style:italic">@item.Name</span>
+                <input type="button" value="Chat" id="chatWithUSer" onClick="chatWithUser(' @item.Username ')" />
+
+            </div>
+
+            }
+        }
+    }
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+@using Blogee.Models
+@model SearchModel
+<head>
+   
+</head>
+<html>
+<body>
+<h3>Search</h3>
+
+<div>
+    @if (Model.ListPosts != null)
+    {
+        foreach (var item in Model.ListPosts)
+        {
+            
+            string content_id = item.Author + item.Title; 
+            <div>
+                    <div>
+                        <div style="font-weight:bold" onclick="show_content(content_id)">@item.Author - @item.Date - @item.Location</div> <br />
+                        <div style="font-style:italic"onclick="show_content(content_id)">@item.Tags</div> <br />
+                        <div style="font-size:large" onclick="show_content(content_id)">@item.Title</div> <br />
+                        <div onclick="show_content(content_id)">@item.Description</div> <br />
+                        <div style = "display:none" id=content_id>@item.Content</div>
+                    </div>
+            </div>
+            
+        }
+    }
+</div>
+<script>
+   
+    function show_content(i) {
+        if (window.getComputedStyle(i).display === "none") {
+            document.getElementById(i).style.display = "block";
+        }
+        else {
+            document.getElementById(i).style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

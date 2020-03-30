@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 @using Blogee.Models;
+@model SearchModel
 
 <html>
 <head>
@@ -21,21 +22,29 @@
 
                 @if (CurrentUserModel.CurrentLoggedIn == false)
                 {
-                <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("SignUp", "SignUp", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item active">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("SignUp", "SignUp", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 }
 
                 @if (CurrentUserModel.CurrentLoggedIn == true)
                 {
-                <li class="nav-item active">@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("NewPost", "NewPost", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Messages", "Messages", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("LogOut", "LogOut", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item active">@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("NewPost", "NewPost", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Messages", "Messages", "Messages", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("LogOut", "LogOut", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
                 }
 
             </ul>
+
+            <!-- input can not be nested inside ul, so we are putting it just after -->
+            @using (Html.BeginForm("Search", "Shared", FormMethod.Post))
+            {
+                <span style="color:white;"> Search : </span> @Html.TextBoxFor(m => m.SearchTerm) 
+                <input id="Submit" type="submit" value="submit" />
+            }
+
         </div>
     </nav>
     <div class="container body-content">

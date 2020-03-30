@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Blogee.Models
 {
-    public class Post
+    public class PostModel
     {
         public string Title { get; set; }
 
