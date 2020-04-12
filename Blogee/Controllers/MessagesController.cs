@@ -117,7 +117,73 @@ namespace Blogee.Controllers
             SearchModel contactChatWithModel = new SearchModel() ;
             contactChatWithModel.UserOfInterest.Username = OtherUserModel.OtherUsername;
 
-            return View("/Views/Messages/Chat.cshtml", model:contactChatWithModel);
+            string otherUser = OtherUserModel.OtherUsername;
+            string currentUser = CurrentUserModel.CurrentUsername;
+
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "sqlserver-aiday.database.windows.net";
+                builder.UserID = "serverusername";
+                builder.Password = "ConnectDB1";
+                builder.InitialCatalog = "Blogee_db";
+
+                using (SqlConnection openCon = new SqlConnection(builder.ConnectionString))
+                {
+                    // when you select a person to chat with, then you also need to update the number of messages in our chat
+                    // for some reason when together it doesn't work so split into two different strings
+                    string verifyMessageNumber1 = "SELECT MAX(MessageNumber) FROM dbo.Messages WHERE (User1 = @User5 AND User2 = @User6)";
+                    string verifyMessageNumber2 = "SELECT MAX(MessageNumber) FROM dbo.Messages WHERE (User1 = @User3 AND User2 = @User4)";
+                    MessageModel.numberMessage = 0;
+
+                    using (SqlCommand queryFindMessageNumber1 = new SqlCommand(verifyMessageNumber1))
+                    {
+                        queryFindMessageNumber1.Connection = openCon;
+                        queryFindMessageNumber1.Parameters.Add("@User5", SqlDbType.VarChar, 50).Value = otherUser;
+                        queryFindMessageNumber1.Parameters.Add("@User6", SqlDbType.VarChar, 50).Value = currentUser;
+
+                        // for some reason after this statement we don't go to the evaluation of the next integer
+                        object queryResult1 = queryFindMessageNumber1.ExecuteScalar();
+
+                        // when aiday.mar signs in and talks to bobby query result returns one
+                        // when bobby signs in and talks to aiday.mar query result returns two
+                        // which means it does not take into account the difference in order
+                        // in the select statement above
+
+                        if (queryResult1 != DBNull.Value)
+                        {
+                            MessageModel.numberMessage += Convert.ToInt32(queryResult1);
+                        }
+                    }
+
+                    using (SqlCommand queryFindMessageNumber2 = new SqlCommand(verifyMessageNumber2))
+                    {
+                        queryFindMessageNumber2.Connection = openCon;
+                        queryFindMessageNumber2.Parameters.Add("@User3", SqlDbType.VarChar, 50).Value = currentUser;
+                        queryFindMessageNumber2.Parameters.Add("@User4", SqlDbType.VarChar, 50).Value = otherUser;
+                        
+                        // for some reason after this statement we don't go to the evaluation of the next integer
+                        object queryResult2 = queryFindMessageNumber2.ExecuteScalar();
+
+                        // when aiday.mar signs in and talks to bobby query result returns one
+                        // when bobby signs in and talks to aiday.mar query result returns two
+                        // which means it does not take into account the difference in order
+                        // in the select statement above
+                        
+                        if (queryResult2 != DBNull.Value)
+                        {
+                            MessageModel.numberMessage += Convert.ToInt32(queryResult2);
+                        }
+                    }
+                }
+            }
+
+            catch (SqlException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+
+            return View("/Views/Chat/Chat.cshtml", model:contactChatWithModel);
         }
 
     }

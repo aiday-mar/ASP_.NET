@@ -17,8 +17,12 @@ namespace Blogee.Models
         // the user we want to chat with
         public UserModel UserOfInterest { get; set; }
 
+        // when we want to send a message to somebody in the chat
+        public string SendMessage { get; set; }
+
         public List<PostModel> ListPosts { get; set; }
 
         public List<UserModel> ListUsers { get; set; }
+
     }
 }

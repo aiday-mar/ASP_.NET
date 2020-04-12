@@ -1,0 +1,62 @@
+﻿@using Blogee.Models;
+@model SearchModel 
+
+<html>
+    
+<head>
+  
+    <script>
+        $(document).ready(function () {
+
+            // update the chat every 2 seconds
+            var refreshId = setInterval(function () {
+                $.ajax({
+                    url: '@Url.Action("UpdateChat", "Chat")',
+                    type: "POST",
+                    cache: false,
+                    data: { username: @Model.UserOfInterest.Username},
+                });
+            }, 5000);
+        })
+    </script>
+</head>
+<body>
+    <h1>@Model.UserOfInterest.Username</h1>
+
+    <!-- here you need to now display the posts and be able to send a post also-->
+
+    <div id="MessageContainer">
+        @if (MessageModel.listMessages != null)
+        {
+
+            if (MessageModel.update == true)
+            {
+                <script>
+                    $('#MessageContainer').empty();
+                </script>
+
+                foreach (var item in MessageModel.listMessages)
+                {
+                    <div>
+                        <div>
+                            <div style="font-weight:bold">@item.Author</div> <br />
+                            <div>@item.Message</div> <br />
+                        </div>
+                    </div>
+                }
+
+                // then you don't update until you have to do it again the next time
+                MessageModel.update = false;
+            }
+        }
+    </div>
+
+    <!-- here I need to send the current username again -->
+    @using (Html.BeginForm("SendMessage", "Chat", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.SendMessage);
+        <input type="submit" value="send" />
+    }
+
+</body>
+</html>

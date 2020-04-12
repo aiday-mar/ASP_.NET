@@ -235,7 +235,6 @@ namespace Blogee.Controllers
             CurrentUserModel.CurrentUsername = "";
 
             return RedirectToAction("Index", "Home"); }
-
         
     }
 }

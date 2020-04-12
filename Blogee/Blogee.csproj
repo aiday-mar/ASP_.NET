@@ -125,13 +125,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DBController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\IndividualMessageModel.cs" />
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\OtherUserModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CurrentUserModel.cs" />
@@ -286,7 +290,7 @@
     <Content Include="Views\Dashboard\NewPost.cshtml" />
     <Content Include="Views\Shared\Search.cshtml" />
     <Content Include="Views\Messages\Messages.cshtml" />
-    <Content Include="Views\Messages\Chat.cshtml" />
+    <Content Include="Views\Chat\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
